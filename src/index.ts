@@ -6,13 +6,15 @@ import type { WeatherData } from "./types";
 import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles({
-    div: {
-        width: "100%",
-    },
 
     grid: {
         display: "grid",
         gridTemplateColumns: "1fr 1fr",
+        width: "100vw",
+        height: "100vh",
+        alignItems: "center",
+        justifyItems: "center",
+        backgroundColor: "#c1c1e0ff",
     },
 });
 

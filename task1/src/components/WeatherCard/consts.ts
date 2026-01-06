@@ -1,5 +1,11 @@
 export const CITIES = ["Jerusalem", "Tel Aviv", "Haifa", "Eilat"];
 
+export const COLD_TEMPERATURE = 15
+export const NORMAL_TEMPERATURE = 30
+
+export const MIN_TEMPERATURE = -10;
+export const MAX_TEMPERATURE = 49;
+
 export type WeatherCondition =
     | "FREEZING"
     | "COLD"

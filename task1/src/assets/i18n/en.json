@@ -1,0 +1,6 @@
+{
+    "WEATHER_CARD": {
+        "TEMPERATURE": "Temperature",
+        "HUMIDITY": "Humidity"
+    }
+}

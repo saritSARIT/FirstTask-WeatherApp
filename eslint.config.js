@@ -68,6 +68,7 @@ export default defineConfig([
         typescript: { project: "*/tsconfig.json" },
       },
       react: { version: "detect" },
+      
     },
 
     rules: {
@@ -190,7 +191,7 @@ export default defineConfig([
   },
   {
     //frontend configuration
-    files: ["task1/**"],
+    files: ["Task1/**"],
 
     languageOptions: { globals: globals.browser },
 

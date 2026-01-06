@@ -1,7 +1,6 @@
-import Index from "./index";
+import type { FC } from "react";
+import {WeatherPage} from "./pages/WeatherPage/WeatherPage";
 
-const App = () => {
-  return <Index />;
-};
+const App:FC = () => <WeatherPage />;
 
 export default App;

@@ -1,12 +1,14 @@
 import { createUseStyles } from "react-jss";
+import type { StylesProperties } from "./weatherCardProperties";
 
-const useStyles = createUseStyles({
+export const useStyles = createUseStyles({
     weatherCard: {
         padding: "1rem",
         borderRadius: "8px",
         color: "#fff",
         textAlign: "center",
         fontFamily: "Asistent, sans-serif",
+        backgroundColor: ({ color }: StylesProperties) => color,
     },
     details: {
         display: "grid",
@@ -20,4 +22,3 @@ const useStyles = createUseStyles({
     },
 });
 
-export default useStyles

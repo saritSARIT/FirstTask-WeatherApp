@@ -8,8 +8,7 @@ import securityPlugin from "eslint-plugin-security";
 import unicornPlugin from "eslint-plugin-unicorn";
 import globals from "globals";
 import tseslint from "typescript-eslint";
-import { defineConfig } from 'eslint/config'
-
+import { defineConfig } from "eslint/config";
 
 const namingConventionOptions = [
   "warn",
@@ -19,7 +18,10 @@ const namingConventionOptions = [
   { selector: ["typeLike"], format: ["PascalCase"] },
 ];
 
-const mergeNaming = (...selectors) => [...namingConventionOptions, ...selectors];
+const mergeNaming = (...selectors) => [
+  ...namingConventionOptions,
+  ...selectors,
+];
 
 const abbreviationOptions = [
   "warn",
@@ -57,7 +59,10 @@ export default defineConfig([
   functionalPlugin.configs.all,
   {
     languageOptions: {
-      parserOptions: { projectService: true, tsconfigRootDir: import.meta.dirname },
+     parserOptions: {
+        project: resolve(__dirname, "tsconfig.json"), 
+        tsconfigRootDir: __dirname,                   
+      },
     },
     //import rules are defined manually as the config objects jam the eslint vscode ui
     plugins: { import: importPlugin },
@@ -68,14 +73,17 @@ export default defineConfig([
         typescript: { project: "*/tsconfig.json" },
       },
       react: { version: "detect" },
-      
     },
 
     rules: {
       //not that important and conflict with prettier
       indent: "off",
       "object-curly-newline": "off",
-      "operator-linebreak": ["warn", "after", { overrides: { ":": "before", "?": "before" } }],
+      "operator-linebreak": [
+        "warn",
+        "after",
+        { overrides: { ":": "before", "?": "before" } },
+      ],
       "sort-imports": "off",
 
       //unnecessary
@@ -186,7 +194,7 @@ export default defineConfig([
       //allowed abbreviations team convention
       "unicorn/prevent-abbreviations": abbreviationOptions,
 
-      'unicorn/no-array-sort': 'off',
+      "unicorn/no-array-sort": "off",
     },
   },
   {
@@ -196,7 +204,10 @@ export default defineConfig([
     languageOptions: { globals: globals.browser },
 
     plugins: { import: importPlugin, "react-hooks": hooksPlugin },
-    extends: [queryPlugin.configs["flat/recommended"], reactPlugin.configs.flat.all],
+    extends: [
+      queryPlugin.configs["flat/recommended"],
+      reactPlugin.configs.flat.all,
+    ],
 
     rules: {
       //deprecated for react 19
@@ -267,7 +278,10 @@ export default defineConfig([
         ],
       }),
       //allow PascalCase component file names
-      "unicorn/filename-case": ["warn", { cases: { camelCase: true, pascalCase: true } }],
+      "unicorn/filename-case": [
+        "warn",
+        { cases: { camelCase: true, pascalCase: true } },
+      ],
       //allow abbreviations that are standard for frontend
       "unicorn/prevent-abbreviations": mergeAbbreviations({
         props: false,
@@ -301,6 +315,5 @@ export default defineConfig([
         res: false,
       }),
     },
-  }
-
-])
+  },
+]);

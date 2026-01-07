@@ -1,25 +1,17 @@
 /* eslint-disable unicorn/no-nested-ternary */
 /* eslint-disable no-nested-ternary */
 
-import { random, flow, assign } from "lodash/fp";
-import type { WeatherCardProperties } from "./weatherCardProperties";
 import {
-    COLD_TEMPERATURE, MAX_TEMPERATURE, MIN_TEMPERATURE, NORMAL_TEMPERATURE,
-    type WeatherCondition
+  COLD_TEMPERATURE,
+  NORMAL_TEMPERATURE,
+  WeatherCondition,
 } from "./consts";
 
-
-export const generateRandomWeather = (city: string): WeatherCardProperties =>
-    flow(
-        () => ({}),
-        assign({ city }),
-        assign({ temporary: random(MIN_TEMPERATURE, MAX_TEMPERATURE) }),
-        assign({ humidity: random(0, 100) })
-    )();
-
-
-export const getWeatherCondition = (temporary: number): WeatherCondition =>
-    temporary <= 0 ? "FREEZING"
-        : temporary <= COLD_TEMPERATURE ? "COLD"
-            : temporary <= NORMAL_TEMPERATURE ? "NORMAL"
-                : "HOT";
+export const getWeatherCondition = (temperature: number): WeatherCondition =>
+  temperature <= 0
+    ? WeatherCondition.FREEZING
+    : temperature <= COLD_TEMPERATURE
+      ? WeatherCondition.COLD
+      : temperature <= NORMAL_TEMPERATURE
+        ? WeatherCondition.NORMAL
+        : WeatherCondition.HOT;

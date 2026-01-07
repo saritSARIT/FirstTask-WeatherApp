@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
-    "strict": true,
-    "strictNullChecks": true,
+     "strict": true,
     "target": "esnext",
     "lib": [
       "dom",
@@ -16,5 +15,11 @@
     "resolveJsonModule": true,
     "noEmit": true,
     "jsx": "react-jsx",
+      "baseUrl": ".",
+    "paths": {
+      "@components/*": ["src/components/*"],
+      "@pages/*": ["src/pages/*"],
+      "@assets/*": ["src/assets/*"]
+    }
   }
 }

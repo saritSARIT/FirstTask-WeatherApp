@@ -1,6 +1,7 @@
-import { Document } from "mongoose";
+import { Types } from "mongoose";
 
-export type IUser = Document & {
+export type IUser ={
+  _id: Types.ObjectId;
   username: string;
   displayedName: string;
 }

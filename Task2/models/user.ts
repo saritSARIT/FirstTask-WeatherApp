@@ -1,18 +1,22 @@
-import { Schema, model, InferSchemaType } from "mongoose";
+import { Schema, model } from "mongoose";
+import { IUser } from "../types/Iuser";
 
-const userSchema = new Schema({
-  username: {
-    type: String,
-    required: true,
-    unique: true,
-    index: true,
+const userSchema = new Schema<IUser>(
+  {
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+      index: true,
+    },
+    displayedName: {
+      type: String,
+      required: true,
+    },
   },
-  displayedName: {
-    type: String,
-    required: true,
-  },
-});
-
-export type User = InferSchemaType<typeof userSchema>;
+  {
+    versionKey: false,
+  }
+);
 
 export default model("User", userSchema);

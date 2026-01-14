@@ -1,6 +1,7 @@
-import { Schema, model,InferSchemaType } from "mongoose";
+import { Schema, model, InferSchemaType } from "mongoose";
+import { IPost } from "../types/Ipost";
 
-const postSchema = new Schema(
+const postSchema = new Schema<IPost>(
   {
     postName: {
       type: String,
@@ -27,11 +28,9 @@ const postSchema = new Schema(
     },
   },
   {
-    timestamps: true
+    timestamps: { createdAt: true, updatedAt: false },
+    versionKey: false,
   }
 );
-
-export type Post = InferSchemaType<typeof postSchema>;
-
 
 export default model("Post", postSchema);

@@ -1,7 +1,8 @@
 import type { Request, Response, NextFunction } from "express";
+import { StatusCodes } from "http-status-codes";
 
 enum HttpStatus {
-  INTERNAL_SERVER_ERROR = 500,
+  INTERNAL_SERVER_ERROR = StatusCodes.INTERNAL_SERVER_ERROR,
 }
 
 const isError = (value: unknown): value is Error =>

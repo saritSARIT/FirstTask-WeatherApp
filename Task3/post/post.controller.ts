@@ -7,7 +7,7 @@ type Params = { id: string };
 
 export const postController = {
   createPost: (
-    req: Request<{}, {}, Post, {}>,
+    req: Request,
     res: Response,
     next: NextFunction
   ): void => {
@@ -18,7 +18,7 @@ export const postController = {
   },
 
   getAllPosts: (
-    _req: Request,
+    req: Request,
     res: Response,
     next: NextFunction
   ): void => {
@@ -40,7 +40,7 @@ export const postController = {
   },
 
   updatePost: (
-    req: Request<Params, {}, Post>,
+    req: Request<Params, Post>,
     res: Response,
     next: NextFunction
   ): void => {

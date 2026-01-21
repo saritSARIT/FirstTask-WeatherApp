@@ -1,11 +1,13 @@
 import express from "express";
 import userRoutes from "./user/user.routes";
 import postRoutes from "./post/post.routes";
-import  "./database";
 import { errorHandler } from "./middlewares/errorHandler";
+import { databaseConnect } from "database";
 
 const app = express();
 const port = process.env.PORT;
+
+databaseConnect();
 
 app.use(express.json());
 

@@ -1,5 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
-import Joi from "joi";
+import type Joi from "joi";
+import { StatusCodes } from "http-status-codes";
 
 export const validateBody =
   (schema: Joi.ObjectSchema) =>
@@ -7,7 +8,7 @@ export const validateBody =
     const { error } = schema.validate(req.body);
 
     error
-      ? res.status(400).json({
+      ? res.status(StatusCodes.BAD_REQUEST).json({
           message: error.details[0].message,
         })
       : next();

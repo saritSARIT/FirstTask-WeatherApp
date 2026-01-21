@@ -1,12 +1,12 @@
 import  { connect } from "mongoose";
 
-const databaseUri = process.env.databaseURI || "";
+const databaseUri = process.env.databaseURI ?? "";
 
 const throwError = (message: string): void => {
   throw new Error(message);
 }
 
-export const dbConnect = () => { 
+export const databaseConnect = () => { 
 (!databaseUri) && throwError("Missing database URI in environment variables"),
 
 connect(databaseUri)

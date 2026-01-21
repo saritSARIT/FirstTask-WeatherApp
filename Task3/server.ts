@@ -1,20 +1,23 @@
 import express from "express";
-import userRoutes from "./routes/userRoutes";
-import postRoutes from "./routes/postRoutes";
-import "./db";
+import userRoutes from "./user/user.routes";
+import postRoutes from "./post/post.routes";
+import  "./database";
+import { errorHandler } from "./middlewares/errorHandler";
 
 const app = express();
-const PORT = 3000;
+const port = process.env.PORT;
 
 app.use(express.json());
 
 app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
 
+app.use(errorHandler);
+
 app.get("/", (req, res) => {
   res.send("Server is running");
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
 });

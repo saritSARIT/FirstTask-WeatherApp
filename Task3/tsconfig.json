@@ -1,18 +1,23 @@
 {
     "compilerOptions": {
-        "target": "es2019",
-        "module": "commonjs",
+        "strict": true,
+        "target": "esnext",
+        "module": "esnext",
         "sourceMap": true,
         "outDir": "dist/src",
-        "strict": true,
+        "allowSyntheticDefaultImports": true,
         "forceConsistentCasingInFileNames": true,
+        "moduleResolution": "bundler",
         "skipLibCheck": true,
         "typeRoots": ["./node_modules/@types", "./typings"],
         "esModuleInterop": true,
         "resolveJsonModule": true,
- 
+        "noEmit": true,
         "baseUrl": ".",
         "paths": { "@Libs/*": ["../../Libs/src/*"] }
     },
     "exclude": ["node_modules"]
 }
+
+
+

@@ -1,0 +1,15 @@
+import  { connect } from "mongoose";
+
+const databaseUri = process.env.databaseURI || "";
+
+const throwError = (message: string): void => {
+  throw new Error(message);
+}
+
+export const dbConnect = () => { 
+(!databaseUri) && throwError("Missing database URI in environment variables"),
+
+connect(databaseUri)
+  .then(() => { console.log("Connected to MongoDB!"); })
+  .catch((error) => { console.error("Error connecting to MongoDB:", error) });
+}

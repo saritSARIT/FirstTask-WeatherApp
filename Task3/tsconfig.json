@@ -18,24 +18,5 @@
     "exclude": ["node_modules"]
 }
 
-
-
-// {
-//     "compilerOptions": {
-//         "target": "esnext",
-//         "module": "commonjs",
-//         "sourceMap": true,
-//         "outDir": "dist/src",
-//         "strict": true,
-//         "forceConsistentCasingInFileNames": true,
-//         "skipLibCheck": true,
-//         "typeRoots": ["./node_modules/@types", "./typings"],
-//         "esModuleInterop": true,
-//         "resolveJsonModule": true,
- 
-        
-//     },
-//     "exclude": ["node_modules"]
-// }
  
  

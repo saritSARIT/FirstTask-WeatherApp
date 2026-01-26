@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { validateBody } from "../middlewares/validate";
+import { validateRequest } from "../middlewares/validate";
 import {
   createPostSchema,
   updatePostSchema,
@@ -8,10 +8,10 @@ import { postController } from "./post.controller";
 
 const postRoutes = Router();
 
-postRoutes.post("/", validateBody(createPostSchema), postController.createPost);
+postRoutes.post("/", validateRequest({ body: createPostSchema }), postController.createPost);
 postRoutes.get("/", postController.getAllPosts);
 postRoutes.get("/:id", postController.getPostById);
-postRoutes.put("/:id", validateBody(updatePostSchema), postController.updatePost);
+postRoutes.put("/:id", validateRequest({ body: updatePostSchema }), postController.updatePost);
 postRoutes.delete("/:id", postController.deletePost);
 
 export default postRoutes;

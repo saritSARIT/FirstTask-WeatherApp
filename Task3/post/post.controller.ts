@@ -3,61 +3,35 @@ import { postManager } from "./post.manager";
 import { StatusCodes } from "http-status-codes";
 import type { Post } from "../types/post";
 
-type Params = { id: string };
+export const warpController =
+  (fn: Function) => (req: Request, res: Response, next: NextFunction) => {
+    Promise.resolve(fn(req, res, next)).catch(next);
+  };
 
 export const postController = {
-  createPost: (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): void => {
-    postManager
-      .createPost(req.body)
-      .then((post) => res.status(StatusCodes.CREATED).json(post))
-      .catch(next);
-  },
+  createPost: warpController(async (req: Request, res: Response) => {
+    const post = await postManager.createPost(req.body);
+    res.status(StatusCodes.CREATED).json(post);
+  }),
+  getAllPosts: warpController(async (req: Request, res: Response) => {
+    const posts = await postManager.getAllPosts();
+    res.json(posts);
+  }),
 
-  getAllPosts: (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): void => {
-    postManager
-      .getAllPosts()
-      .then((posts) => res.json(posts))
-      .catch(next);
-  },
+  getPostById: warpController(async (req: Request<{ id: string }>, res: Response) => {
+    const post = await postManager.getPostById(req.params.id);
+    res.json(post);
+  }),
 
-  getPostById: (
-    req: Request<Params>,
-    res: Response,
-    next: NextFunction
-  ): void => {
-    postManager
-      .getPostById(req.params.id)
-      .then((post) => res.json(post))
-      .catch(next);
-  },
+  updatePost: warpController(
+    async (req: Request<{ id: string }, Post>, res: Response) => {
+      const post = await postManager.updatePost(req.params.id, req.body);
+      res.json(post);
+    },
+  ),
 
-  updatePost: (
-    req: Request<Params, Post>,
-    res: Response,
-    next: NextFunction
-  ): void => {
-    postManager
-      .updatePost(req.params.id, req.body)
-      .then((post) => res.json(post))
-      .catch(next);
-  },
-
-  deletePost: (
-    req: Request<Params>,
-    res: Response,
-    next: NextFunction
-  ): void => {
-    postManager
-      .deletePost(req.params.id)
-      .then((post) => res.json(post))
-      .catch(next);
-  },
+  deletePost: warpController(async (req: Request<{ id: string }>, res: Response) => {
+    const post = await postManager.deletePost(req.params.id);
+    res.json(post);
+  }),
 };

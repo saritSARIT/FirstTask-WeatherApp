@@ -2,25 +2,18 @@ import type { Request, Response, NextFunction } from "express";
 import { userManager } from "./user.manager";
 import { StatusCodes } from "http-status-codes";
 
+export const warpController =
+  (fn: Function) => (req: Request, res: Response, next: NextFunction) => {
+    Promise.resolve(fn(req, res, next)).catch(next);
+  };
+
 export const userController = {
-  createUser: (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): void => {
-    userManager
-      .createUser(req.body)
-      .then((user) => res.status(StatusCodes.CREATED).json(user))
-      .catch(next);
-  },
-  getAllUsers: (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): void => {
-    userManager
-      .getAllUsers()
-      .then((users) => res.status(StatusCodes.OK).json(users))
-      .catch(next);
-  },
+  createUser: warpController(async (req: Request, res: Response) => {
+    const user = await userManager.createUser(req.body);
+    res.status(StatusCodes.CREATED).json(user);
+  }),
+  getAllUsers: warpController(async (req: Request, res: Response) => {
+    const users = await userManager.getAllUsers();
+    res.json(users);
+  }),
 };

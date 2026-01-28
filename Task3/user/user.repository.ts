@@ -5,6 +5,5 @@ export const userRepository = {
   createUser: async (data: User): Promise<User> =>
     await userSchema.create(data),
 
-  getAllUsers: async (): Promise<User[]> =>
-    await userSchema.find(),
-}
+  getAllUsers: async (): Promise<User[]> => await userSchema.find(),
+};

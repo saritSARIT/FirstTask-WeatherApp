@@ -3,7 +3,7 @@ import { StatusCodes } from "http-status-codes";
 import { isError } from "joi";
 
 export const errorHandler = (
-  error: Error,
+  error: unknown,
   req: Request,
   res: Response,
   next: NextFunction,
